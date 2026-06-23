@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStompMovement : MonoBehaviour
 {
+    public Animator LonchoAnim;
     public Transform PlayerLoc;
     public int PlayerPosValue = 0; //Numero que indica en que paso del camino está el jugador (empieza en 0)
     public Transform CurrentDesignedLoc; //Localizacion designada actual, está para que el jugador no pueda avanzar antes de llegar al punto al que ya se estaba moviendo (va a ser util para cuando el movimiento no sea instantaneo)
@@ -24,6 +25,7 @@ public class PlayerStompMovement : MonoBehaviour
     public Vector3 LastLocation; //está para guardar las coordenadas anteriores del jugador y retrocederlo si es que recibe daño (actualmente funciona devolviendo al jugador a donde estaba antes de tomar daño, lo cual seria en resumen tomar daño y no moverse)
     public Transform TurningPoint1;
     public Transform TurningPoint2;
+    
     public enum LastMove  //determina cual fue el ultimo tipo de movimiento que hizo el jugador esto para devolverlo al tomar daño
     {
         None,
