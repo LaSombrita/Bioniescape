@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStompMovement : MonoBehaviour
 {
@@ -97,59 +98,57 @@ public class PlayerStompMovement : MonoBehaviour
         }
         #endregion
         #region RAIL CHANGE INPUTS
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            RailOffsetterL(1);
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            RailOffsetterR(2);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            RailOffsetterL(3);
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            RailOffsetterR(4);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            RailOffsetterL(5);
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            RailOffsetterR(6);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            RailOffsetterL(7);
-        }
-        if (Input.GetKeyDown(KeyCode.Comma))
-        {
-            RailOffsetterR(8);
-            Debug.Log("Comma");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            RailOffsetterL(9);
-        }
-        if (Input.GetKeyDown(KeyCode.Slash))
-        {
-            RailOffsetterR(10);
-            Debug.Log("underscore/guion");
-        }
-        if (Input.GetKeyDown(KeyCode.Equals))
-        {
-            RailOffsetterL(11);
-            Debug.Log("Interrogacion Inicial");
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    RailOffsetterL(1);
+        //}
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    RailOffsetterR(2);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha4))
+        //{
+        //    RailOffsetterL(3);
+        //}
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    RailOffsetterR(4);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha6))
+        //{
+        //    RailOffsetterL(5);
+        //}
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    RailOffsetterR(6);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha8))
+        //{
+        //    RailOffsetterL(7);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Comma))
+        //{
+        //    RailOffsetterR(8);
+        //    Debug.Log("Comma");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha0))
+        //{
+        //    RailOffsetterL(9);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Slash))
+        //{
+        //    RailOffsetterR(10);
+        //    Debug.Log("underscore/guion");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Equals))
+        //{
+        //    RailOffsetterL(11);
+        //    Debug.Log("Interrogacion Inicial");
+        //}
         #endregion
         if(PlayerPosValue == 11)
         {
-            PlayerLoc.SetPositionAndRotation(TR1.position, Quaternion.identity);
-            PlayerPosValue = 1;
-            RailParentOffset.SetPositionAndRotation(TurningPoint1.position, TurningPoint1.rotation);
+            SceneManager.LoadScene("LVL2");
         }
     }
 
@@ -184,42 +183,42 @@ public class PlayerStompMovement : MonoBehaviour
     #endregion
 
     #region cosas relacionadas al cambio de carril
-    public void RailOffsetterR(int KeyValue2)
-    {
-        if (KeyValue2 == PlayerPosValue && RailPosition != 2)
-        {
-            OffsetR();
-            Debug.Log("Offset R");
-            LastMovement = LastMove.RailChangeR;
-            RailPosition++;
-        }
-        else
-        {
-            DamageCondition();
-        }
-    }
-    public void RailOffsetterL(int KeyValue)
-    {
-        if (KeyValue == PlayerPosValue && RailPosition != 0)
-        {
-            OffsetL();
-            Debug.Log("Offset L");
-            LastMovement = LastMove.RailChangeL;
-            RailPosition--;
-        }
-        else
-        {
-            DamageCondition();
-        }
-    }
+    //public void RailOffsetterR(int KeyValue2)
+    //{
+    //    if (KeyValue2 == PlayerPosValue && RailPosition != 2)
+    //    {
+    //        OffsetR();
+    //        Debug.Log("Offset R");
+    //        LastMovement = LastMove.RailChangeR;
+    //        RailPosition++;
+    //    }
+    //    else
+    //    {
+    //        DamageCondition();
+    //    }
+    //}
+    //public void RailOffsetterL(int KeyValue)
+    //{
+    //    if (KeyValue == PlayerPosValue && RailPosition != 0)
+    //    {
+    //        OffsetL();
+    //        Debug.Log("Offset L");
+    //        LastMovement = LastMove.RailChangeL;
+    //        RailPosition--;
+    //    }
+    //    else
+    //    {
+    //        DamageCondition();
+    //    }
+    //}
     public void OffsetL()
     {
-        RailParentOffset.SetLocalPositionAndRotation(RailParentOffset.localPosition += new Vector3(-1, 0, 0), Quaternion.identity);
+        RailParentOffset.SetLocalPositionAndRotation(RailParentOffset.localPosition += new Vector3(-1, 0, 0), RailParentOffset.localRotation);
 
     }
     public void OffsetR()
     {
-        RailParentOffset.SetLocalPositionAndRotation(RailParentOffset.localPosition += new Vector3(1, 0, 0), Quaternion.identity);
+        RailParentOffset.SetLocalPositionAndRotation(RailParentOffset.localPosition += new Vector3(1, 0, 0), RailParentOffset.localRotation);
 
     }
     #endregion
