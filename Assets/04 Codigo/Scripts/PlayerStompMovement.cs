@@ -19,6 +19,7 @@ public class PlayerStompMovement : MonoBehaviour
     public Transform TR10;
     public Transform TR11;
     #endregion
+    public Vector3 ObjectiveTransform;
     public Vector3 LastLocation; //está para guardar las coordenadas anteriores del jugador y retrocederlo si es que recibe daño (actualmente funciona devolviendo al jugador a donde estaba antes de tomar daño, lo cual seria en resumen tomar daño y no moverse)
     public enum LastMove  //determina cual fue el ultimo tipo de movimiento que hizo el jugador esto para devolverlo al tomar daño
     {
@@ -30,6 +31,15 @@ public class PlayerStompMovement : MonoBehaviour
     public LastMove LastMovement; //lo mismo que antes, son raros los enums
     public int RailPosition; // representan numericamente de izquierda a derecha en que carril esta el jugador, 0 es el de la izquierda, 1 es el del centro y 2 es el de la derecha
 
+    public enum MovementState
+    {
+        Static,
+        Moving,
+        Damage,
+        Stumble
+
+    }
+    public MovementState MoveState; 
 
     private void Start()
     {
@@ -133,12 +143,23 @@ public class PlayerStompMovement : MonoBehaviour
             Debug.Log("Interrogacion Inicial");
         }
         #endregion
+        #region MOVEMENT LOOPS
+        if (MoveState == MovementState.Moving)
+        {
+            Vector3.MoveTowards(PlayerLoc.position, ObjectiveTransform, 4f);
+            if(PlayerLoc.position == ObjectiveTransform)
+            {
+                MoveState = MovementState.Static;
+            }
+        }
+        #endregion
     }
 
     #region Cosas relacionadas al daño
     public void DamageCondition() // Este script por el momento solo tiene un debug log, pero es el script donde se bajaria la barra de vida al recibir daño, se gatilla siempre 
     {
         Debug.Log("DamageCondition");
+        MoveState = MovementState.Damage;
     }
 
     private void OnTriggerEnter(Collider other) // detecta cuando el objeto del jugador (la capsula) entra a un trigger que causa que reciba daño
@@ -236,7 +257,9 @@ public class PlayerStompMovement : MonoBehaviour
     }
     public void MoveSuccess(Transform ObjectiveLoc) //funcion que mueve al personaje cuando se cumplen las condiciones (la hice como funcion separada para que sea mas facil editarla al momento de hacer que el movimiento sea mas fluido)
     {
-        PlayerLoc.position = ObjectiveLoc.position;
+        //PlayerLoc.position = ObjectiveLoc.position; 
+        ObjectiveTransform = ObjectiveLoc.position;
+        MoveState = MovementState.Moving;
         LastMovement = LastMove.Walk;
     }
     #endregion
