@@ -143,23 +143,14 @@ public class PlayerStompMovement : MonoBehaviour
             Debug.Log("Interrogacion Inicial");
         }
         #endregion
-        #region MOVEMENT LOOPS
-        if (MoveState == MovementState.Moving)
-        {
-            Vector3.MoveTowards(PlayerLoc.position, ObjectiveTransform, 4f);
-            if(PlayerLoc.position == ObjectiveTransform)
-            {
-                MoveState = MovementState.Static;
-            }
-        }
-        #endregion
+
     }
 
     #region Cosas relacionadas al daño
     public void DamageCondition() // Este script por el momento solo tiene un debug log, pero es el script donde se bajaria la barra de vida al recibir daño, se gatilla siempre 
     {
         Debug.Log("DamageCondition");
-        MoveState = MovementState.Damage;
+        
     }
 
     private void OnTriggerEnter(Collider other) // detecta cuando el objeto del jugador (la capsula) entra a un trigger que causa que reciba daño
@@ -259,7 +250,6 @@ public class PlayerStompMovement : MonoBehaviour
     {
         //PlayerLoc.position = ObjectiveLoc.position; 
         ObjectiveTransform = ObjectiveLoc.position;
-        MoveState = MovementState.Moving;
         LastMovement = LastMove.Walk;
     }
     #endregion
