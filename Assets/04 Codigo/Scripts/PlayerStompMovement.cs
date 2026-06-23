@@ -22,6 +22,7 @@ public class PlayerStompMovement : MonoBehaviour
     public Vector3 ObjectiveTransform;
     public Vector3 LastLocation; //está para guardar las coordenadas anteriores del jugador y retrocederlo si es que recibe daño (actualmente funciona devolviendo al jugador a donde estaba antes de tomar daño, lo cual seria en resumen tomar daño y no moverse)
     public Transform TurningPoint1;
+    public Transform TurningPoint2;
     public enum LastMove  //determina cual fue el ultimo tipo de movimiento que hizo el jugador esto para devolverlo al tomar daño
     {
         None,
@@ -144,7 +145,12 @@ public class PlayerStompMovement : MonoBehaviour
             Debug.Log("Interrogacion Inicial");
         }
         #endregion
-
+        if(PlayerPosValue == 11)
+        {
+            PlayerLoc.SetPositionAndRotation(TR1.position, Quaternion.identity);
+            PlayerPosValue = 1;
+            RailParentOffset.SetPositionAndRotation(TurningPoint1.position, TurningPoint1.rotation);
+        }
     }
 
     #region Cosas relacionadas al daño
