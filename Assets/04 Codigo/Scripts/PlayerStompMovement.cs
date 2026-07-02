@@ -56,8 +56,7 @@ public class PlayerStompMovement : MonoBehaviour
         #region MOVEMENT INPUTS (NEW)
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            KeyMovementExecINITIAL(1, TR1);
-        }
+            KeyMovementExecINITIAL(1, TR1);        }
         if (Input.GetKeyDown(KeyCode.S))
         {
             KeyMovementExec(2, TR2);
